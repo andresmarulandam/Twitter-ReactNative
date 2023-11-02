@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   top: {
     justifyContent: "start",
   },
@@ -20,6 +21,11 @@ const styles = StyleSheet.create({
     big: {
       width: 128,
       height: 128,
+      resizeMode: "contain",
+    },
+    small: {
+      width: 32,
+      height: 32,
       resizeMode: "contain",
     },
   },
