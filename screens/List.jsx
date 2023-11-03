@@ -1,14 +1,9 @@
-import { useEffect } from "react";
-import { Image } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
+import { FlatList, View } from "react-native";
 
-import List from "./List";
-import Create from "./Create";
-import Profile from "./Profile";
+import Tweet from "../components/Tweet";
 
 import globalStyles from "../App.styles";
-
-const Tab = createBottomTabNavigator();
 
 const data = [
   {
@@ -79,25 +74,20 @@ const data = [
   },
 ];
 
-const LogoTitle = () => (
-  <Image
-    source={require("../assets/logo.png")}
-    style={[globalStyles.logo.small]}
-  />
-);
-
-export default function Home({ navigation }) {
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: (props) => <LogoTitle {...props} />,
-    });
-  }, [navigation]);
-
+export default function List() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="List" component={List} />
-      <Tab.Screen name="Create" component={Create} />
-      <Tab.Screen name="Profile" component={Profile} />
-    </Tab.Navigator>
+    <View style={[globalStyles.container, globalStyles.top]}>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <Tweet
+            content={item.content}
+            createdAt={item.createdAt}
+            user={item.user}
+          />
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
   );
 }
