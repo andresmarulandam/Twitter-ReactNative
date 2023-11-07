@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { EvilIcons } from "@expo/vector-icons";
 
 import List from "./List";
 import Create from "./Create";
@@ -94,7 +95,28 @@ export default function Home({ navigation }) {
   }, [navigation]);
 
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let name;
+          if (route.name === "List") {
+            name = "navicon";
+          } else if (route.name === "Create") {
+            name = "plus";
+          } else if (route.name === "Profile") {
+            name = "user";
+          }
+          return (
+            <EvilIcons
+              name={name}
+              size={24}
+              color={focused ? globalStyles.color.primary : "black"}
+            />
+          );
+        },
+        headerShown: false,
+      })}
+    >
       <Tab.Screen name="List" component={List} />
       <Tab.Screen name="Create" component={Create} />
       <Tab.Screen name="Profile" component={Profile} />

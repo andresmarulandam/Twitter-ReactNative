@@ -8,8 +8,6 @@ import SignUp from "./screens/SignUp";
 import Home from "./screens/Home";
 import Create from "./screens/Create";
 
-import globalStyles from "./App.styles";
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
